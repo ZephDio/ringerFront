@@ -1,6 +1,5 @@
 import {TimeInput} from "@nextui-org/date-input";
 import { useState } from "react";
-import { Alarm } from "../../ringer/domain/alarm";
 import { AddAlarmCommand } from "../../ringer/applicative/commands/add-alarm-command-handler";
 import { state } from "../state";
 export const AddAlarmForm = () => {
@@ -19,9 +18,8 @@ export const AddAlarmForm = () => {
     }
 
     const onSubmit = () => {
-        const alarm = new Alarm(time);
         if(!state.addAlarmCommandHandler) throw new Error("Add Alarm Command Handler is not initialized")
-        state.addAlarmCommandHandler.handle(new AddAlarmCommand(alarm))
+        state.addAlarmCommandHandler.handle(new AddAlarmCommand(time))
         state.alarmWatcher?.forceRefresh()
     }
 

@@ -1,6 +1,7 @@
 import { AddAlarmCommandHandler } from "../ringer/applicative/commands/add-alarm-command-handler";
 import { GetAlarmsQueryHandler } from "../ringer/applicative/queries/get-alarms-query";
 import { LocalAlarmProvider } from "../ringer/infrastructure/local-alarm-provider";
+import { AlarmSocket } from "./connection-socket/alarm-socket";
 import { state } from "./state";
 import { AlarmWatcher } from "./watcher/alarm-watcher";
 
@@ -16,4 +17,7 @@ export function initApp(){
 
     const addAlarmCommandHandler = new AddAlarmCommandHandler(alarmProvider);
     state.addAlarmCommandHandler = addAlarmCommandHandler;
+
+    const alarmSocker = new AlarmSocket()
+
 }

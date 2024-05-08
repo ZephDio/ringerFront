@@ -1,15 +1,16 @@
 import { AlarmProvider } from "../applicative/provider/alarm-provider";
-import { Alarm } from "../domain/alarm";
+import { Alarm, AlarmId } from "../domain/alarm";
 
 export class LocalAlarmProvider implements AlarmProvider{
 
-    alarms: Alarm[] = [new Alarm(new Date()), new Alarm(new Date()), new Alarm(new Date())];
+    alarms: Alarm[] = [new Alarm(new AlarmId('1'),new Date()), new Alarm(new AlarmId('1'),new Date("2024-05-08T17:59"))];
     async getAlarms() {
         return this.alarms
     }
-    async addAlarm(alarm: Alarm) {
-       this.alarms.push(alarm);
+    async addAlarm(alarmTime: Date) {
+       this.alarms.push(new Alarm(new AlarmId('1'),alarmTime));
     }
+
     async removeAlarm(alarm: Alarm){
        this.alarms = this.alarms.filter(a => a !== alarm);
     }
