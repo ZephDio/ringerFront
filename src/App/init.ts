@@ -1,7 +1,7 @@
+import { AcknowledgeAlarmCommandHandler } from "../ringer/applicative/commands/acknowledge-alarm-command-handler";
 import { AddAlarmCommandHandler } from "../ringer/applicative/commands/add-alarm-command-handler";
-import { GetAlarmsQueryHandler } from "../ringer/applicative/queries/get-alarms-query";
+import { GetAlarmsQueryHandler } from "../ringer/applicative/queries/get-alarms-query-handler";
 import { LocalAlarmProvider } from "../ringer/infrastructure/local-alarm-provider";
-import { AlarmSocket } from "./connection-socket/alarm-socket";
 import { state } from "./state";
 import { AlarmWatcher } from "./watcher/alarm-watcher";
 
@@ -11,13 +11,13 @@ export function initApp(){
     const alarmProvider = new LocalAlarmProvider();
     const getAlarmsQueryHandler = new GetAlarmsQueryHandler(alarmProvider);
     const alarmWatcher = new AlarmWatcher(3000,getAlarmsQueryHandler);
+    const acknowledgeAlarmCommandHandler = new AcknowledgeAlarmCommandHandler(alarmProvider);
 
     state.alarmWatcher = alarmWatcher;
     alarmWatcher.watch();
 
     const addAlarmCommandHandler = new AddAlarmCommandHandler(alarmProvider);
     state.addAlarmCommandHandler = addAlarmCommandHandler;
-
-    const alarmSocker = new AlarmSocket()
+    state.acknowledgeAlarmCommandHandler = acknowledgeAlarmCommandHandler;
 
 }

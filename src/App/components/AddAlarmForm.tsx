@@ -4,7 +4,7 @@ import { AddAlarmCommand } from "../../ringer/applicative/commands/add-alarm-com
 import { state } from "../state";
 export const AddAlarmForm = () => {
 
-    const [time, setTime] = useState(new Date())
+    const [targetTime, setTime] = useState(new Date())
 
     const onChange = (value : { hour : number , minute : number}) => {
         const date = new Date();
@@ -17,9 +17,9 @@ export const AddAlarmForm = () => {
         setTime(date);
     }
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         if(!state.addAlarmCommandHandler) throw new Error("Add Alarm Command Handler is not initialized")
-        state.addAlarmCommandHandler.handle(new AddAlarmCommand(time))
+        await state.addAlarmCommandHandler.handle(new AddAlarmCommand(targetTime))
         state.alarmWatcher?.forceRefresh()
     }
 
@@ -27,9 +27,9 @@ export const AddAlarmForm = () => {
         <div className="max-w-20 m-auto flex flex-col" >
             <p className="text-xs m-0 ml-3">Add Alarm</p>
             <TimeInput hourCycle={24} className="ml-5" aria-label="Add Alarm" onChange={onChange}/>
-            <div className="bg-teal-700 text-center rounded-xl cursor-pointer" onClick={onSubmit}>
-                Submit
-            </div>
+            <button className="bg-teal-700 hover:bg-teal-500 text-white rounded-lg leading-3 h-8" onClick={onSubmit}>
+                Add Alarm
+            </button>
         </div>
     )
 }

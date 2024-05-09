@@ -1,8 +1,8 @@
 import { AlarmProvider } from "../applicative/provider/alarm-provider";
-import { Alarm, AlarmId } from "../domain/alarm";
+import { Alarm, AlarmId, AlarmState, AudioWrapper } from "../domain/alarm";
 
 
-export class LocalAlarmProvider implements AlarmProvider{
+export class TestLocalAlarmProvider implements AlarmProvider{
 
     constructor(public alarms : Alarm[] = []){}
 
@@ -10,7 +10,7 @@ export class LocalAlarmProvider implements AlarmProvider{
         return this.alarms
     }
     async addAlarm(alarmTime: Date) {
-       this.alarms.push(new Alarm(new AlarmId('1'),alarmTime));
+       this.alarms.push(new Alarm(new AlarmId('1'),alarmTime, AlarmState.PENDING, new AudioWrapper(null))) ;
     }
 
     async acknowledgeAlarm(alarmId: AlarmId){

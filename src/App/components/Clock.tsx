@@ -15,7 +15,7 @@ export const Clock = () => {
     }, [time])
 
     const toPretty = (time: Date) => {
-        const hours = time.getHours()
+        const hours = time.getHours().toString()
         const minutes = time.getMinutes().toString().padStart(2, '0')
         const seconds = time.getSeconds().toString().padStart(2, '0')
         return `${hours}:${minutes}:${seconds}`

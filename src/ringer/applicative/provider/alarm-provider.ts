@@ -1,7 +1,7 @@
-import { Alarm } from "../../domain/alarm";
+import { Alarm, AlarmId } from "../../domain/alarm";
 
 export abstract class AlarmProvider {
     abstract getAlarms(): Promise<Alarm[]>
     abstract addAlarm(alarmTime: Date): Promise<void>
-    abstract removeAlarm(alarm: Alarm): Promise<void>
+    abstract acknowledgeAlarm(alarmId: AlarmId): Promise<void>
 }
