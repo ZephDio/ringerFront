@@ -1,12 +1,12 @@
 import { Alarm, AlarmId, AlarmState, AudioWrapper } from "../../domain/alarm";
-import { TestLocalAlarmProvider } from "../../infrastructure/alarm-provider-test";
+import { TestLocalAlarmProvider } from "../../infrastructure/alarm-provider-test-env";
 import { AlarmProvider } from "../provider/alarm-provider";
 import { AcknowledgeAlarmCommand, AcknowledgeAlarmCommandHandler } from "./acknowledge-alarm-command-handler";
 
 describe('acknowledge alarm', () => {
     let stored = [new Alarm(new AlarmId('1'), new Date(), AlarmState.PENDING, new AudioWrapper(null))];
     let alarmProvider: AlarmProvider
-    let handler : AcknowledgeAlarmCommandHandler
+    let handler: AcknowledgeAlarmCommandHandler
     beforeEach(() => {
         alarmProvider = new TestLocalAlarmProvider(stored);
         handler = new AcknowledgeAlarmCommandHandler(alarmProvider);

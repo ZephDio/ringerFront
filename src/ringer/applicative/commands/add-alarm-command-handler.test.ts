@@ -1,12 +1,12 @@
 import { Alarm } from "../../domain/alarm";
-import { TestLocalAlarmProvider } from "../../infrastructure/alarm-provider-test";
+import { TestLocalAlarmProvider } from "../../infrastructure/alarm-provider-test-env";
 import { AlarmProvider } from "../provider/alarm-provider";
 import { AddAlarmCommand, AddAlarmCommandHandler } from "./add-alarm-command-handler";
 
 describe('add alarm', () => {
-    let stored : Alarm[]= [];
+    let stored: Alarm[] = [];
     let alarmProvider: AlarmProvider
-    let handler : AddAlarmCommandHandler
+    let handler: AddAlarmCommandHandler
     beforeEach(() => {
         alarmProvider = new TestLocalAlarmProvider(stored);
         handler = new AddAlarmCommandHandler(alarmProvider);
