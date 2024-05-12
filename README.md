@@ -8,14 +8,13 @@ Pour lancer l'application:
 => pnpm start
 
 
-###Techno :
+###  Techno :
 
 FrameWork : React
 CSS : Tailwind
 build : VITE
 
-# Test
-
+###  Test :
 pnpm test
 
 Il serait possible d'ajouter des tests de rendu via des storyBook.
